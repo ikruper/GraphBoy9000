@@ -28,11 +28,8 @@ while (True):
     for item in range(0, num_elements):
         value = raw_input("Enter point "+ str(item + 1) + " x,y: ")
         temp = value.split(",")
-        x_values.append(temp[0])
-        y_values.append(temp[1])            
-        
-    x_values = [float(i) for i in x_values]
-    y_values = [float(i) for i in y_values]
+        x_values.append(float(temp[0]))
+        y_values.append(float(temp[1]))            
 
     pylab.plot(x_values, y_values, label=series_name)
     
