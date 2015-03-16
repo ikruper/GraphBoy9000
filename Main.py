@@ -20,7 +20,8 @@ while (True):
     #Initial questions
     series_name = raw_input("Name of data series " + str(series_ct) +": ")
     if series_name == None:
-        series_name = ""        
+        series_name = ""
+    points_choice = raw_input("Line(1) or points only(2): ")        
     num_elements = input("How many elements: ")
     
     
@@ -31,7 +32,10 @@ while (True):
         x_values.append(float(temp[0]))
         y_values.append(float(temp[1]))            
 
-    pylab.plot(x_values, y_values, label=series_name)
+    if points_choice == '1':
+        pylab.plot(x_values, y_values, label=series_name)
+    if points_choice == '2':
+        pylab.plot(x_values, y_values, 'o', label=series_name)
     
     
     #Line of best fit calculation and prompt
