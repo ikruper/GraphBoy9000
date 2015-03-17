@@ -6,7 +6,7 @@ Created on Thu Feb 26 16:09:12 2015
 """
 
 import pylab
-import BestFitLine
+import Line_Conditioning
 
 name_plot = raw_input("Name of plot: ")
 x_lbl = raw_input("X axis label: ")
@@ -32,17 +32,19 @@ while (True):
         x_values.append(float(temp[0]))
         y_values.append(float(temp[1]))            
 
+    #Plotting points
     if points_choice == '1':
         pylab.plot(x_values, y_values, label=series_name)
     if points_choice == '2':
         pylab.plot(x_values, y_values, 'o', label=series_name)
+    Line_Conditioning.Padding(x_values, y_values)
     
     
     #Line of best fit calculation and prompt
     if series_ct == 1:    
         lbf_choice = raw_input("Would you like a line of best fit for the series y/n: ")
     if lbf_choice == "y" or lbf_choice == "Y":
-        BestFitLine.DrawLine(x_values, y_values)
+        Line_Conditioning.DrawLine(x_values, y_values)
         break
 
     
