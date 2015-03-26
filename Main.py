@@ -2,8 +2,9 @@
 """
 Created on Thu Feb 26 16:09:12 2015
 
-@author: ian
+@author: Ian
 """
+
 
 import pylab
 import Line_Conditioning
@@ -43,18 +44,21 @@ while (True):
     #Line of best fit calculation and prompt
     if series_ct == 1:    
         lbf_choice = raw_input("Would you like a line of best fit for the series y/n: ")
-    if lbf_choice == "y" or lbf_choice == "Y":
-        Line_Conditioning.DrawLine(x_values, y_values)
-        break
+        if lbf_choice == "y" or lbf_choice == "Y":
+            Line_Conditioning.DrawLine(x_values, y_values)
+            break
 
-    
     #Prompt for another data series
-    else:
+    if series_ct < 6:
         an_choice = raw_input("Would you like to add another data series y/n: ")
         series_ct += 1
         if an_choice == "n" or an_choice == "N":
             print("Done!")
             break
+        
+    else:
+        print("Done!")
+        break
     
 
 #Graph formatting things
