@@ -19,13 +19,15 @@ def DrawLine(x_values, y_values):
     slope, intercept, r_value, p_value, std_err = stats.linregress(lbf_x_values
                 ,lbf_y_values)
     if (slope == 0):
-        best_fit_line = 'y = '+str(intercept)
+#        best_fit_line = 'y = '+str(intercept)
+        best_fit_line = 'y = '+'{0:.5f}'.format(intercept)
     elif (intercept == 0):
-        best_fit_line = 'y = '+str(slope)+'x'
+#        best_fit_line = 'y = '+str(slope)+'x'
+        best_fit_line = 'y = '+'{0:.5f}'.format(slope)+'x'
     elif (intercept < 0):
-        best_fit_line = 'y = '+(str(slope)+'x - '+str(abs(intercept)))
+        best_fit_line = 'y = '+'{0:.5f}'.format(slope)+'x - '+'{0:.5f}'.format(abs(intercept))
     else:
-        best_fit_line = 'y = '+(str(slope)+'x + '+str(intercept))
+        best_fit_line = 'y = '+'{0:.5f}'.format(slope)+'x'+'x + '+'{0:.5f}'.format(abs(intercept))
     r_squared = str(r_value**2)
     return best_fit_line, r_squared
     
