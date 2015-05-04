@@ -10,13 +10,13 @@
     cols: 1
     Label:
         text: 'Graph Boy 9000'
-        font_size: 60
+        font_size: 70
     GridLayout:
         cols: 2
         spacing: 10
         row_default_height: 30
         row_force_default: True
-        padding: [15,5,15,5]
+        padding: [30,10,30,10]
         FieldLabel:
             text: 'Graph Title:'
         FieldInput:
@@ -54,11 +54,16 @@
             CheckBox:
                 id: line_radio
                 group: 'marker'
-            
-        FieldLabel:
-            id: current_value
-            text: 'Value 1'
-            font_size: 24
+
+        GridLayout:
+            cols: 2
+            spacing: 30
+            FieldLabel:
+                id: current_series
+                text: 'Series 1'           
+            FieldLabel:
+                id: current_value
+                text: 'Value 1'
         GridLayout:
             cols: 2
             spacing: 30
@@ -69,39 +74,50 @@
 
         Button:
             id: series_button
-            height: 40
             text: 'New Series'
-            on_press: root.new_series()       
+            on_release: root.new_series()       
         Button:
             id: next_button
             text: 'Enter Value'
-            on_press: root.get_current_value()
+            on_release: root.current_value()
+
+        Button:
+            id: delete_series
+            text: 'Delete Series'
+            on_release: root.delete_series()
+        Button:
+            id: undo_button
+            text: 'Undo Entry'
+            on_release: root.undo_entry()
         
         GridLayout:
             cols: 2
-            spacing: 30
             Label:
                 text: 'Line of best fit equation:'
             Label:
                 id: lbf_equation
+
         GridLayout:
             cols: 2
-            spacing: 30
             Label:
                 text: 'R squared value:'
             Label:
                 id: r_squared
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 10
+        padding: [15,5,15,5]
+        Button:
+            id: exit_button
+            text: 'Exit'
+            size_hint: [.1, .2]
+            on_release: root.exit_app()
+        Button:
+            id: submit_button
+            text: 'Submit'
+            size_hint: [.1, .2]
+            on_release: root.submit()
         
-    FieldLabel:
-        text: ' '
-    FieldLabel:
-        text: ' '
-    Button:
-        id: submit_button
-        text: 'Submit'
-        height: 40
-        on_press: root.submit()
-
-         
+                     
     
     
