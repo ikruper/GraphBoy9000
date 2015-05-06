@@ -52,29 +52,35 @@ class Menu(GridLayout):
             self.ids['current_value'].text = "Value "+str(self.val_counter + 1)
     
     def delete_series(self, *args):
-        if (self.ser_counter > 0):
+        if (self.ser_counter >= 0):
             del(self.x_vals[self.ser_counter])
             del(self.y_vals[self.ser_counter])
-            self.ser_counter -= 1
+            if (self.ser_counter > 0):
+                self.ser_counter -= 1
+                self.ids['data_series_label'].text = self.data_labels[self.ser_counter]
+            else:
+                self.ids['data_series_label'].text = ''
             self.val_counter = len(self.x_vals[self.ser_counter])
-            self.ids['current_value'].text = "Value "+str(self.val_counter)
+            self.ids['current_value'].text = "Value "+str(self.val_counter+1) 
             self.ids['current_series'].text = "Series "+str(self.ser_counter + 1)
-            self.ids['x_value'].text = str(self.x_vals[self.ser_counter][len(self.x_vals[self.ser_counter])-1])
-            self.ids['y_value'].text = str(self.y_vals[self.ser_counter][len(self.y_vals[self.ser_counter])-1])
+            self.ids['x_value'].text = ""
+            self.ids['y_value'].text = ""
+                    
         
     def submit(self, *args):
+        self.data_labels.append(self.ids['data_series_label'].text)
         pylab.title(self.ids['graph_title'].text)
         pylab.xlabel(self.ids['xaxis_label'].text)
         pylab.ylabel(self.ids['yaxis_label'].text)
         pylab.grid(b=True, which="both")
         for series in range(self.ser_counter + 1):
             if (self.ids['dots_radio'].active == True):
-                pylab.plot(self.x_vals[series], self.y_vals[series], 'o', label=self.ids['data_series_label'].text)
+                pylab.plot(self.x_vals[series], self.y_vals[series], 'o', label=self.data_labels[series])
             elif (self.ids['line_radio'].active == True):
-               pylab.plot(self.x_vals[series], self.y_vals[series], label=self.ids['data_series_label'].text)
+               pylab.plot(self.x_vals[series], self.y_vals[series], label=self.data_labels[series])
             Line_Conditioning.Padding(self.x_vals[series], self.y_vals[series])         
         if (self.ids['lbf_check'].active == True and self.ser_counter == 0):
-            lbf, rsq = Line_Conditioning.DrawLine(self.x_vals, self.y_vals)
+            lbf, rsq = Line_Conditioning.DrawLine(self.x_vals[0], self.y_vals[0])
             self.ids['lbf_equation'].text = lbf
             self.ids['r_squared'].text = rsq
         pylab.legend(loc='best')
